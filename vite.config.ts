@@ -9,6 +9,9 @@ const manifest: ManifestV3Export = {
   action: {
     default_popup: 'index.html',
   },
+  permissions: [
+    "audio"
+  ]
 };
 
 // https://vitejs.dev/config/
