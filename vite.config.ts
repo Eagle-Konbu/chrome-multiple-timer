@@ -17,4 +17,7 @@ export default defineConfig({
     react(),
     crx({ manifest }),
   ],
+  build: {
+    chunkSizeWarningLimit: 1024
+  }
 })
