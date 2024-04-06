@@ -1,10 +1,12 @@
 import { useState } from "react";
 
-import { FloatButton, Space } from "antd";
+import { Button, FloatButton, Space } from "antd";
 import { PlusOutlined } from '@ant-design/icons';
 
 import { TimerConfigCard } from "../components/TimerConfigCard";
 import { Timer } from "../types/Timer";
+import NewWindow from "react-new-window";
+import { TimerView } from "./TimerView";
 
 const getRandomColor = () => {
   const letters = "0123456789ABCDEF";
@@ -22,8 +24,9 @@ const defaultTimer: Timer = {
   title: "Timer 1",
 }
 
-export function TimerConfig() {
+export function Home() {
   const [timers, setTimers] = useState<Timer[]>([defaultTimer]);
+  const [timerIsInProgess, setTimerIsInProgess] = useState<boolean>(false);
 
   const handleAddTimerConfig = () => {
     const newTimer: Timer = {
@@ -46,11 +49,24 @@ export function TimerConfig() {
   return (
     <>
       <Space direction="vertical" size={16}>
+        <Button
+          type="primary"
+          onClick={() => setTimerIsInProgess(true)}
+        >
+          Start!
+        </Button>
         {timers.map((timerConfig: Timer, idx: number) => (
           <TimerConfigCard timer={timerConfig} onClose={() => handleDeleteTimerConfig(idx)} />
         ))}
       </Space>
       <FloatButton icon={<PlusOutlined />} onClick={handleAddTimerConfig} />
+      {timerIsInProgess &&
+        <NewWindow
+          onUnload={() => setTimerIsInProgess(false)}
+        >
+          <TimerView />
+        </NewWindow>
+      }
     </>
   );
 }
