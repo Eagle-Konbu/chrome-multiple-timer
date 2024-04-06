@@ -64,7 +64,10 @@ export function Home() {
         <NewWindow
           onUnload={() => setTimerIsInProgess(false)}
         >
-          <TimerView />
+          <TimerView 
+            startAt={Date.now()}
+            timers={timers}
+          />
         </NewWindow>
       }
     </>
