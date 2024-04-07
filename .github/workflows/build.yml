@@ -24,11 +24,8 @@ jobs:
       - name: Build project
         run: yarn build
 
-      - name: Zip dist directory
-        run: zip -r dist.zip dist
-
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: chrome-multiple-timer
-          path: dist.zip
+          path: dist
