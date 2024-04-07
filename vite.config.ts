@@ -8,6 +8,11 @@ const manifest: ManifestV3Export = {
   manifest_version: 3,
   action: {
     default_popup: 'index.html',
+  },
+  icons: {
+    16: 'icons/icon16.png',
+    48: 'icons/icon48.png',
+    128: 'icons/icon128.png',
   }
 };
 
