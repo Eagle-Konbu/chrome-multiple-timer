@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import { Typography } from "antd";
+import { Typography, Space } from "antd";
 // import useSound from "use-sound";
 
 import { Timer } from "../types/Timer";
@@ -27,8 +27,9 @@ export function TimerView(props: TimerViewProps) {
     if (remainingSeconds <= 0) {
       return "00:00";
     }
-    const min = remainingSeconds / 60
-    const sec = remainingSeconds % 60;
+
+    const min = Math.floor(remainingSeconds / 60)
+    const sec = Math.floor(remainingSeconds) % 60;
     return `${min < 10 ? `0${min}` : min}:${sec < 10 ? `0${sec}` : sec}`;
   }
 
@@ -48,13 +49,13 @@ export function TimerView(props: TimerViewProps) {
   })
 
   return (
-    <div>
+    <Space direction="vertical" size={16}>
       <HourGlass 
         width={100}
         color={props.timers[currentTimerIdx].color}
         progress={elapsedSeconds / timerToSeconds(props.timers[currentTimerIdx])}
       />
       <Title>{getTimeFormat(timerToSeconds(props.timers[currentTimerIdx]) - elapsedSeconds)}</Title>
-    </div>
+    </Space>
   );
 }
