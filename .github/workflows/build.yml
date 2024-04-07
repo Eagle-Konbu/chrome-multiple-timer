@@ -24,8 +24,13 @@ jobs:
       - name: Build project
         run: yarn build
 
+      - name: Make Directory
+        run: |
+          mkdir chrome-multiple-timer
+          mv dist chrome-multiple-timer
+
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: chrome-multiple-timer
-          path: dist
+          path: chrome-multiple-timer
