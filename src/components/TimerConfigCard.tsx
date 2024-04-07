@@ -2,12 +2,18 @@ import { useState } from "react";
 
 import { Button, Card, ColorPicker, InputNumber } from "antd";
 import { DownOutlined, CloseOutlined } from '@ant-design/icons';
-
-import type { Timer } from "../types/Timer";
+import { Color } from "antd/es/color-picker";
 
 interface TimerConfigCardProps {
-  timer: Timer;
+  title: string;
+  minutes: number;
+  seconds: number;
+  color: string;
   onClose?: () => void;
+  onTitleChange?: (title: string | null) => void;
+  onMinutesChange?: (minutes: number | null) => void;
+  onSecondsChange?: (seconds: number | null) => void;
+  onColorChange?: (color: Color, hex: string) => void;
 }
 
 export function TimerConfigCard(props: TimerConfigCardProps) {
@@ -15,7 +21,7 @@ export function TimerConfigCard(props: TimerConfigCardProps) {
 
   return (
     <Card
-      title={props.timer.title}
+      title={props.title}
       style={{ width: 300 }}
       extra={
         <Button
@@ -27,19 +33,22 @@ export function TimerConfigCard(props: TimerConfigCardProps) {
     >
       <InputNumber
         min={0}
-        value={props.timer.min}
+        value={props.minutes}
+        onChange={props.onMinutesChange}
       />
       {" : "}
       <InputNumber
         min={0}
         max={59}
-        value={props.timer.second}
+        value={props.seconds}
+        onChange={props.onSecondsChange}
       />
       <br /><br />
       <ColorPicker
         open={open}
         onOpenChange={setOpen}
-        value={props.timer.color}
+        value={props.color}
+        onChange={props.onColorChange}
         showText={() => (
           <DownOutlined
             rotate={open ? 180 : 0}

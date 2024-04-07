@@ -56,7 +56,28 @@ export function Home() {
           Start!
         </Button>
         {timers.map((timerConfig: Timer, idx: number) => (
-          <TimerConfigCard timer={timerConfig} onClose={() => handleDeleteTimerConfig(idx)} />
+          <TimerConfigCard
+            title={timerConfig.title}
+            minutes={timerConfig.min}
+            seconds={timerConfig.second}
+            color={timerConfig.color}
+            onMinutesChange={(min) => {
+              const newTimers = [...timers];
+              newTimers[idx].min = min || 0;
+              setTimers(newTimers);
+            }}
+            onSecondsChange={(sec) => {
+              const newTimers = [...timers];
+              newTimers[idx].second = sec || 0;
+              setTimers(newTimers);
+            }}
+            onColorChange={(_, hex) => {
+              const newTimers = [...timers];
+              newTimers[idx].color = hex || getRandomColor();
+              setTimers(newTimers);
+            }}
+            onClose={() => handleDeleteTimerConfig(idx)}
+          />
         ))}
       </Space>
       <FloatButton icon={<PlusOutlined />} onClick={handleAddTimerConfig} />
@@ -64,8 +85,7 @@ export function Home() {
         <NewWindow
           onUnload={() => setTimerIsInProgess(false)}
         >
-          <TimerView 
-            startAt={Date.now()}
+          <TimerView
             timers={timers}
           />
         </NewWindow>
