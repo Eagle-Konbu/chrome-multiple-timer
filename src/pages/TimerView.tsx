@@ -4,7 +4,7 @@ import { Typography } from "antd";
 // import useSound from "use-sound";
 
 import { Timer } from "../types/Timer";
-import Sound from "../sounds/bell.mp3";
+// import Sound from "../sounds/bell.mp3";
 import { HourGlass } from "../components/HourGlass";
 
 const { Title } = Typography;
