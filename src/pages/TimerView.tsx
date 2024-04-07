@@ -29,6 +29,10 @@ export function TimerView(props: TimerViewProps) {
   useEffect(() => {
     const id = setInterval(() => {
       if (elapsedSeconds + 0.1 >= timerToSeconds(props.timers[currentTimerIdx])) {
+        if (currentTimerIdx === props.timers.length - 1) {
+          clearInterval(id);
+          return;
+        }
         setCurrentTimerIdx(currentTimerIdx => currentTimerIdx + 1);
         setElapsedSeconds(0);
       }
